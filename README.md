@@ -21,6 +21,21 @@ In fast-paced logistics and live-ops environments, customer support agents often
 
 ---
 
+## 📸 Screenshots
+
+Here is a look at the application in action:
+
+### 1. Real-Time Dashboard & Live Activity
+![Dashboard](screenshots/dashboard.png)
+
+### 2. Creating a Ticket
+![Create Ticket](screenshots/create-ticket.png)
+
+### 3. Real-Time Ticket Locking Protocol
+![Locked Ticket](screenshots/lock-ticket.png)
+
+---
+
 ## 🏗️ Build Architecture (HLD)
 
 The system relies on a hybrid architecture: REST for standard CRUD operations, and Socket.IO for real-time state mutation and locking validation.
