@@ -23,6 +23,8 @@ interface ActivityLog {
   agentName: string;
 }
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
+
 export default function Dashboard() {
   const [currentAgent, setCurrentAgent] = useState(AGENTS[0]);
   const [tickets, setTickets] = useState<Ticket[]>([]);
@@ -67,7 +69,7 @@ export default function Dashboard() {
   useEffect(() => {
     const fetchTickets = async () => {
       try {
-        const res = await fetch('http://localhost:4000/api/tickets');
+        const res = await fetch(`${API_URL}/api/tickets`);
         const data = await res.json();
         if (data.success) {
           setTickets(data.data);
@@ -156,7 +158,7 @@ export default function Dashboard() {
 
   const saveTicket = async (ticketId: string, data: Partial<Ticket>) => {
     try {
-      const res = await fetch(`http://localhost:4000/api/tickets/${ticketId}`, {
+      const res = await fetch(`${API_URL}/api/tickets/${ticketId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json', 'x-agent-id': currentAgent.id },
         body: JSON.stringify(data)
@@ -176,7 +178,7 @@ export default function Dashboard() {
 
   const handleCreateTicket = async (data: any) => {
     try {
-      const res = await fetch('http://localhost:4000/api/tickets', {
+      const res = await fetch(`${API_URL}/api/tickets`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'x-agent-id': currentAgent.id },
         body: JSON.stringify(data)
