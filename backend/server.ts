@@ -26,6 +26,11 @@ app.use(cors({
 }));
 app.use(express.json());
 
+// Root health check route
+app.get('/', (req, res) => {
+  res.send('API is running...');
+});
+
 app.use('/api/tickets', ticketRoutes);
 
 // Centralized error handler
@@ -38,7 +43,7 @@ setupSocketHandlers(io);
 
 const startServer = async () => {
   try {
-    const mongoUri = 'mongodb+srv://ayushranjan9531_db_user:EB0PnHjNukn0UeA0@cluster0.gk9yvlg.mongodb.net/?appName=Cluster0';
+    const mongoUri = process.env.MONGODB_URI || 'mongodb+srv://ayushranjan9531_db_user:EB0PnHjNukn0UeA0@cluster0.gk9yvlg.mongodb.net/?appName=Cluster0';
 
     await mongoose.connect(mongoUri);
     console.log(`Connected to MongoDB Atlas`);
